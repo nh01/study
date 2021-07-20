@@ -12,4 +12,67 @@
     <artifactId>java8</artifactId>
 
 
+    <build>
+        <finalName>java8-baffle</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- 主要使用的是maven提供的assembly插件完成 -->
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <!-- 具体的配置文件 -->
+                            <descriptors>${project.basedir}/assembly/assembly.xml</descriptors>
+                        </configuration>
+                        <id>make-assembly</id>
+                        <!--绑定到maven操作类型上-->
+                        <phase>package</phase>
+                        <!--运行一次-->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--<profiles>
+        <profile>
+            <id>node</id>
+            <properties>
+                &lt;!&ndash;传递给脚本的参数值&ndash;&gt;
+                <activeProfile>node</activeProfile>
+                <package-name>${scripts_packageName}</package-name>
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>node1</id>
+            <properties>
+                <activeProfile>node1</activeProfile>
+                <package-name>${scripts_packageName}</package-name>
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+        </profile>
+        <profile>
+            <id>node2</id>
+            <properties>
+                <activeProfile>node2</activeProfile>
+                <package-name>${scripts_packageName}</package-name>
+                <boot-main>${scripts_bootMain}</boot-main>
+            </properties>
+        </profile>
+    </profiles>-->
 </project>
